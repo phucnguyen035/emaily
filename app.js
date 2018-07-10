@@ -1,12 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+const { cookieKey } = require('./config/keys');
 
-// Routes
+// Load Models
+require('./models/User');
+
+// Load Routes
 const authRoutes = require('./routes/authRoutes');
-
-// Passport middleware
-require('./services/passport');
 
 // Initialize variables
 const app = express();
@@ -19,9 +22,13 @@ mongoose
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-// Body parser middleware
+// Initialize middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieSession({ maxAge: 7 * 24 * 60 * 60 * 1000, keys: [cookieKey] }));
+app.use(passport.initialize());
+app.use(passport.session());
+require('./services/passport');
 
 app.get('/', (req, res) => {
   res.json({ message: 'hello world!' });
@@ -29,6 +36,10 @@ app.get('/', (req, res) => {
 
 // Use routes
 app.use('/auth/', authRoutes);
+
+app.get('/api/current_user', (req, res) => {
+  res.send(req.user);
+});
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
