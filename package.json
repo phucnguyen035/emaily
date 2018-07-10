@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon"
+    "server": "nodemon",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm:server\" \"npm:client\""
   },
   "author": "Phuc Nguyen",
   "license": "ISC",
@@ -21,6 +23,7 @@
     "passport-google-oauth20": "^1.0.0"
   },
   "devDependencies": {
+    "concurrently": "^3.6.0",
     "nodemon": "^1.17.5"
   }
 }
