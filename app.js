@@ -10,6 +10,7 @@ require('./models/User');
 
 // Load Routes
 const authRoutes = require('./routes/authRoutes');
+const billingRoutes = require('./routes/billingRoutes');
 
 // Initialize variables
 const app = express();
@@ -36,10 +37,7 @@ app.get('/', (req, res) => {
 
 // Use routes
 app.use('/auth/', authRoutes);
-
-app.get('/api/current_user', (req, res) => {
-  res.send(req.user);
-});
+app.use('/api/stripe', billingRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Payments from './Payments';
 
 const mapStateToProps = ({ auth }) => ({ auth });
 
@@ -19,9 +20,17 @@ const Header = ({ auth }) => {
 
       default:
         return (
-          <li>
-            <a href="/auth/logout">Logout</a>
-          </li>
+          <Fragment>
+            <li>
+              <Payments />
+            </li>
+            <li style={{ margin: '0 10px', cursor: 'default' }}>
+              Credits: <strong>{auth.credits}</strong>
+            </li>
+            <li>
+              <a href="/auth/logout">Logout</a>
+            </li>
+          </Fragment>
         );
     }
   };
