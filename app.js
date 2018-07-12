@@ -31,10 +31,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./services/passport');
 
-app.get('/', (req, res) => {
-  res.json({ message: 'hello world!' });
-});
-
 // Use routes
 app.use('/auth/', authRoutes);
 app.use('/api/stripe', billingRoutes);

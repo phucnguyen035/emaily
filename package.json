@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "emaily",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -9,8 +9,11 @@
   "scripts": {
     "start": "node app.js",
     "server": "nodemon",
-    "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm:server\" \"npm:client\""
+    "client-install": "npm install --prefix client",
+    "client-build": "npm run build --prefix client",
+    "client-start": "npm start --prefix client",
+    "dev": "concurrently \"npm:server\" \"npm:client-start\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run client-install && npm run client-build"
   },
   "author": "Phuc Nguyen",
   "license": "ISC",
@@ -25,6 +28,7 @@
   },
   "devDependencies": {
     "concurrently": "^3.6.0",
+    "eslint": "^5.1.0",
     "nodemon": "^1.17.5"
   }
 }
