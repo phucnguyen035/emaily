@@ -35,6 +35,16 @@ require('./services/passport');
 app.use('/auth/', authRoutes);
 app.use('/api/stripe', billingRoutes);
 
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+// Open server
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
