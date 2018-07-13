@@ -2,20 +2,18 @@ import React, { PureComponent, Fragment } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchUser } from '../actions/authActions';
+import * as actions from '../actions';
 import Header from './Header';
 import Landing from './Landing';
 
 const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
 
-const mapDispatchToProps = dispatch => ({ handleFetchUser: () => dispatch(fetchUser()) });
-
 class App extends PureComponent {
   componentDidMount() {
-    const { handleFetchUser } = this.props;
+    const { fetchUser } = this.props;
 
-    handleFetchUser();
+    fetchUser();
   }
 
   render() {
@@ -35,10 +33,10 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  handleFetchUser: PropTypes.func.isRequired
+  fetchUser: PropTypes.func.isRequired
 };
 
 export default connect(
   undefined,
-  mapDispatchToProps
+  actions
 )(App);

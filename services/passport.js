@@ -10,13 +10,9 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await User.findById(id)
-    .exec()
-    .catch(err => console.error(err));
+  const user = await User.findById(id);
 
-  if (user) {
-    return done(null, user);
-  }
+  done(null, user);
 });
 
 passport.use(
@@ -28,15 +24,14 @@ passport.use(
       proxy: true,
     },
     async (accessToken, refreshToken, profile, done) => {
-      const foundUser = await User.findOne({ googleId: profile.id });
+      const existingUser = await User.findOne({ googleId: profile.id });
 
-      // Return existing user if found, else create new user
-      if (foundUser) {
-        return done(null, foundUser);
+      if (existingUser) {
+        return done(null, existingUser);
       }
 
       const newUser = await new User({ googleId: profile.id }).save();
-      return done(null, newUser);
+      done(null, newUser);
     }
   )
 );
