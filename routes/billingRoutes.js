@@ -5,6 +5,7 @@ const requireLogin = require('../middlewares/requireLogin');
 
 const router = express.Router();
 
+// Pay to earn credits using Stripe API
 router.post('/', requireLogin, async (req, res) => {
   await stripe.charges
     .create({

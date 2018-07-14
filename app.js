@@ -8,10 +8,12 @@ const { cookieKey } = require('./config/keys');
 
 // Load Models
 require('./models/User');
+require('./models/Survey');
 
 // Load Routes
 const authRoutes = require('./routes/authRoutes');
 const billingRoutes = require('./routes/billingRoutes');
+const surveyRoutes = require('./routes/surveyRoutes');
 
 // Initialize variables
 const app = express();
@@ -35,6 +37,7 @@ require('./services/passport');
 // Use routes
 app.use('/auth/', authRoutes);
 app.use('/api/stripe', billingRoutes);
+app.use('/api/surveys', surveyRoutes);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
