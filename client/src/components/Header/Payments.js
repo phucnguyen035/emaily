@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 
 const Payments = ({ handleToken }) => (
   <StripeCheckout
@@ -13,7 +13,9 @@ const Payments = ({ handleToken }) => (
     token={token => handleToken(token)}
     stripeKey={process.env.REACT_APP_STRIPE_KEY}
   >
-    <input type="button" className="btn" value="Add Credits" />
+    <button type="button" className="btn waves-effect waves-light pink">
+      Add Credits
+    </button>
   </StripeCheckout>
 );
 

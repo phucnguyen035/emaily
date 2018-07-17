@@ -16,7 +16,7 @@
   },
   "rules": {
     "comma-dangle": "off",
-    "no-unused-vars": "off",
+    "no-unused-vars": "warn",
     "function-paren-newline": ["error", "consistent"],
     "import/no-named-as-default": "off",
     "react/destructuring-assignment": ["warn", "always"],
@@ -32,9 +32,10 @@
       {
         "components": ["Link"],
         "specialLink": ["to", "hrefLeft", "hrefRight"],
-        "aspects": ["noHref", "invalidHref", "preferButton"]
+        "aspects": ["noHref", "preferButton"]
       }
     ],
+    "jsx-a11y/label-has-for": "off",
     "object-curly-newline": ["error", { "consistent": true }]
   }
 }

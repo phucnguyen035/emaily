@@ -28,11 +28,15 @@ router.post('/', requireLogin, requireCredits, async (req, res) => {
 
   const { recipients, ...surveyData } = req.body;
   const recipientsArray = recipients
-    .split(', ')
+    .split(',')
     .map(email => ({ email: email.trim() }));
 
   if (req.user.credits - recipientsArray.length < 0) {
-    return res.status(403).send({ error: 'You do not have enough credits' });
+    return res.status(403).send('Not enough credits');
+  }
+
+  if (!req.body.validated) {
+    return res.send({ validated: false });
   }
 
   const survey = new Survey({

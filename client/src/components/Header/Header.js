@@ -21,13 +21,13 @@ const Header = ({ auth }) => {
       default:
         return (
           <Fragment>
-            <li>
+            <li style={{ textAlign: 'center' }}>
               <Payments />
             </li>
-            <li style={{ margin: '0 10px', cursor: 'default' }}>
+            <li style={{ margin: '0 10px', cursor: 'default' }} id="credits">
               Credits: <strong>{auth.credits}</strong>
             </li>
-            <li>
+            <li style={{ margin: '0 10px' }} id="logout">
               <a href="/auth/logout">Logout</a>
             </li>
           </Fragment>
@@ -36,16 +36,27 @@ const Header = ({ auth }) => {
   };
 
   return (
-    <nav>
-      <div className="nav-wrapper">
-        <div className="container">
-          <Link to={auth ? '/surveys' : '/'} className="left brand-logo">
-            Emaily
-          </Link>
-          <ul className="right">{renderContent()}</ul>
+    <Fragment>
+      <nav>
+        <div className="nav-wrapper indigo">
+          <a href="#" data-target="mobile" className="sidenav-trigger">
+            <i className="material-icons">menu</i>
+          </a>
+
+          <div className="container">
+            <Link to={auth ? '/surveys' : '/'} className="brand-logo">
+              Emaily
+            </Link>
+
+            <ul className="right hide-on-med-and-down">{renderContent()}</ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      <ul className="sidenav center" id="mobile">
+        {renderContent()}
+      </ul>
+    </Fragment>
   );
 };
 

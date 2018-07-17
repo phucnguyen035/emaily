@@ -3,11 +3,10 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import * as actions from '../actions';
-import Header from './Header';
+import Header from './Header/Header';
 import Landing from './Landing';
-
-const Dashboard = () => <h2>Dashboard</h2>;
-const SurveyNew = () => <h2>SurveyNew</h2>;
+import Dashboard from './Dashboard';
+import SurveyNew from './Surveys/SurveyNew';
 
 class App extends PureComponent {
   componentDidMount() {
