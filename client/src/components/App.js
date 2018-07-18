@@ -1,12 +1,15 @@
 import React, { PureComponent, Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import PrivateRoute from '../routes/PrivateRoute';
+import PublicRoute from '../routes/PublicRoute';
 import * as actions from '../actions';
 import Header from './Header/Header';
 import Landing from './Landing';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 import SurveyNew from './Surveys/SurveyNew';
+import Loading from './Loading';
 
 class App extends PureComponent {
   componentDidMount() {
@@ -16,14 +19,22 @@ class App extends PureComponent {
   }
 
   render() {
+    const { auth } = this.props;
+
     return (
       <Router>
         <Fragment>
           <Header />
           <div className="container">
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/surveys" component={Dashboard} />
-            <Route path="/surveys/new" component={SurveyNew} />
+            {auth === null ? (
+              <Loading />
+            ) : (
+              <Switch>
+                <PublicRoute exact path="/" component={Landing} />
+                <PrivateRoute exact path="/surveys" component={Dashboard} />
+                <PrivateRoute path="/surveys/new" component={SurveyNew} />
+              </Switch>
+            )}
           </div>
         </Fragment>
       </Router>
@@ -32,10 +43,15 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  fetchUser: PropTypes.func.isRequired
+  fetchUser: PropTypes.func.isRequired,
+  auth: PropTypes.oneOfType([PropTypes.bool, PropTypes.object])
 };
 
+App.defaultProps = { auth: null };
+
+const mapStateToProps = ({ auth }) => ({ auth });
+
 export default connect(
-  undefined,
+  mapStateToProps,
   actions
 )(App);

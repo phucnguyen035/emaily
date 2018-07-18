@@ -27,7 +27,7 @@ let SurveyForm = ({ handleSubmit, showFormReview, pristine, submitting, error })
 
   return (
     <div>
-      <h3 className="center-align">Survey Form</h3>
+      <h4 className="center-align indigo-text darken-1">Create Survey</h4>
       <form onSubmit={handleSubmit(data => validateSurvey(data))}>
         {renderField()}
 

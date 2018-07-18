@@ -17,6 +17,8 @@
   "rules": {
     "comma-dangle": "off",
     "no-unused-vars": "warn",
+    "no-shadow": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
     "function-paren-newline": ["error", "consistent"],
     "import/no-named-as-default": "off",
     "react/destructuring-assignment": ["warn", "always"],

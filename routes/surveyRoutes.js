@@ -13,11 +13,9 @@ const Survey = mongoose.model('survey');
 
 // Get all surveys created by current user
 router.get('/', requireLogin, async (req, res) => {
-  const surveys = await Survey.find({ _user: req.user.id });
-
-  if (!surveys.length) {
-    return res.status(404).send({ error: 'No survey found!' });
-  }
+  const surveys = await Survey.find({ _user: req.user.id }).select({
+    recipients: false,
+  });
 
   res.send(surveys);
 });

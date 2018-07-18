@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import SurveyList from './SurveyList';
 
 const Dashboard = () => (
   <Fragment>
-    <h3>Welcome to the dashboard!</h3>
+    <h4 className="center indigo-text darken-3">Dashboard</h4>
+
+    <SurveyList />
 
     <div className="fixed-action-btn">
       <Link

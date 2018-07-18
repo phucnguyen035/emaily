@@ -18,7 +18,7 @@ const SurveyFormReview = ({ handleCancel, formValues, createSurvey, history }) =
 
   return (
     <div className="container">
-      <h3 className="center">Review Phase</h3>
+      <h4 className="center indigo-text darken-1">Review</h4>
       <p className="center">Review your inputs before sending</p>
 
       {reviewFields()}
