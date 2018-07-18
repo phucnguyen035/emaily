@@ -12,7 +12,7 @@ const surveySchema = new Schema({
   recipients: [
     {
       email: { type: String, required: true },
-      response: { type: Boolean, default: false },
+      responded: { type: Boolean, default: false },
     },
   ],
   dateSent: { type: Date, default: Date.now() },
