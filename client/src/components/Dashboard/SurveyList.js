@@ -13,18 +13,28 @@ class SurveyList extends PureComponent {
   renderSurveys() {
     const { surveys } = this.props;
 
-    return surveys.reverse().map(({ _id, title, body, dateSent, yes, no }) => (
+    // Reverse array to get latest item first
+    return surveys.reverse().map(({ _id, title, lastResponded, body, dateSent, yes, no }) => (
       <div className="card darken-1" key={_id} style={{ cursor: 'default' }}>
-        <div className="card-content">
+        <div className="card-content" style={{ height: '10rem' }}>
           <span className="card-title">
             <strong className="indigo-text darken-3">{title}</strong>
           </span>
 
-          <p>{body}</p>
+          <p style={{ marginBottom: '1rem' }}>{body}</p>
 
-          <p className="right">
-            Created on: <strong>{new Date(dateSent).toLocaleDateString('en-GB')}</strong>
-          </p>
+          <div className="right">
+            <p>
+              Created on: <strong>{new Date(dateSent).toLocaleDateString('en-GB')}</strong>
+            </p>
+
+            {lastResponded && (
+              <p>
+                Last response:{' '}
+                <strong>{new Date(lastResponded).toLocaleDateString('en-GB')}</strong>
+              </p>
+            )}
+          </div>
         </div>
         <div className="card-action">
           <a href="#" className="green-text">

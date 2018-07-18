@@ -11,8 +11,8 @@ import formFields from './formFields';
 import * as actions from '../../actions';
 
 let SurveyForm = ({ handleSubmit, showFormReview, pristine, submitting, error }) => {
-  const renderField = () => formFields.map(({ name, label }) => (
-    <Field key={name} type="text" name={name} component={SurveyField} label={label} />
+  const renderField = () => formFields.map(({ name, label, info }) => (
+    <Field key={name} type="text" name={name} component={SurveyField} label={label} info={info} />
   ));
 
   const validateSurvey = async (data) => {
